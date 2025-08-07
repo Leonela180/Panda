@@ -1,0 +1,805 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyOdeNPNWkWMLjN7qztPwN6y",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Leonela180/Panda/blob/main/ejercicio%20panda\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "le6wi7OIdJI0"
+      },
+      "outputs": [],
+      "source": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# EJERCICIOS PANDA"
+      ],
+      "metadata": {
+        "id": "prpE5XxZd-7E"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "EJERCICIO 1\n"
+      ],
+      "metadata": {
+        "id": "SiXnyGqseDRc"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import pandas as pd"
+      ],
+      "metadata": {
+        "id": "0qlfUO9peUwK"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "1\n",
+        "\n",
+        "inicio = int(input('Introduce el año inicial: '))\n",
+        "fin = int(input('Introduce el año final: '))\n",
+        "ventas = {}\n",
+        "for i in range(inicio, fin+1):\n",
+        "    ventas[i] = float(input('Introduce las ventas del año ' + str(i) +': '))\n",
+        "ventas = pd.Series(ventas)\n",
+        "print('Ventas\\n', ventas)\n",
+        "print('Ventas con descuento\\n', ventas*0.9)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "VGJV_Ts2eFrb",
+        "outputId": "1d845e19-2630-4834-fe6f-97d485b0d946"
+      },
+      "execution_count": 2,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Introduce el año inicial: 2010\n",
+            "Introduce el año final: 2012\n",
+            "Introduce las ventas del año 2010: 10\n",
+            "Introduce las ventas del año 2011: 10\n",
+            "Introduce las ventas del año 2012: 10\n",
+            "Ventas\n",
+            " 2010    10.0\n",
+            "2011    10.0\n",
+            "2012    10.0\n",
+            "dtype: float64\n",
+            "Ventas con descuento\n",
+            " 2010    9.0\n",
+            "2011    9.0\n",
+            "2012    9.0\n",
+            "dtype: float64\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "EJERCICIO 2"
+      ],
+      "metadata": {
+        "id": "5GYEucCPe62L"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def resumen_notas(diccionario):\n",
+        "    serie = pd.Series(diccionario)\n",
+        "    return pd.Series({\n",
+        "        'Mínima': serie.min(),\n",
+        "        'Máxima': serie.max(),\n",
+        "        'Media': serie.mean(),\n",
+        "        'Desviación típica': serie.std()\n",
+        "    })\n",
+        "\n",
+        "notas = {'Ana': 8, 'Luis': 5, 'Carlos': 6, 'Marta': 9}\n",
+        "print(resumen_notas(notas))\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "sdiD46LEe8n6",
+        "outputId": "e5c0e622-76b4-43b0-cd49-6e8f7a5b3a69"
+      },
+      "execution_count": 3,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Mínima               5.000000\n",
+            "Máxima               9.000000\n",
+            "Media                7.000000\n",
+            "Desviación típica    1.825742\n",
+            "dtype: float64\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "EJERCICIO 3"
+      ],
+      "metadata": {
+        "id": "ngpe822-e85z"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def aprobados_ordenados(diccionario):\n",
+        "    serie = pd.Series(diccionario)\n",
+        "    return serie[serie >= 5].sort_values(ascending=False)\n",
+        "\n",
+        "notas = {'Ana': 8, 'Luis': 4, 'Carlos': 6, 'Marta': 9}\n",
+        "print(aprobados_ordenados(notas))\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "vB5y46Yce-5K",
+        "outputId": "4a0a6aac-7884-4f61-ac1a-dab1327cbbba"
+      },
+      "execution_count": 4,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Marta     9\n",
+            "Ana       8\n",
+            "Carlos    6\n",
+            "dtype: int64\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "EJERCICO 4"
+      ],
+      "metadata": {
+        "id": "gCsAkulNfBmj"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "datos = [['Enero', 30500, 22000], ['Febrero', 35600, 23400], ['Marzo', 28300, 18100], ['Abril', 33900,20700]]\n",
+        "contabilidad = pd.DataFrame(datos, columns=['Mes', 'Ventas', 'Gastos'])\n",
+        "print(contabilidad)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "uVl41-gnfDAc",
+        "outputId": "857a6156-d320-444d-9aa2-c219cc20fb6e"
+      },
+      "execution_count": 14,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "       Mes  Ventas  Gastos\n",
+            "0    Enero   30500   22000\n",
+            "1  Febrero   35600   23400\n",
+            "2    Marzo   28300   18100\n",
+            "3    Abril   33900   20700\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "EJERCICIO 5"
+      ],
+      "metadata": {
+        "id": "le-ROUYhfDRj"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def balance_total(df, meses):\n",
+        "    df_filtrado = df[df['Mes'].isin(meses)]\n",
+        "    return (df_filtrado['Ventas'] - df_filtrado['Gastos']).sum()\n",
+        "\n",
+        "meses = ['Enero', 'Marzo']\n",
+        "print(balance_total(df, meses))\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "hQjAqhAEfEh7",
+        "outputId": "87faa32c-6967-4e24-d2ca-dc7295342c0e"
+      },
+      "execution_count": 6,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "18700\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "EJERCICIO 6"
+      ],
+      "metadata": {
+        "id": "l0K3YvVTfFWy"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "\n",
+        "def resumen_cotizaciones(fichero):\n",
+        "    df = pd.read_csv(fichero, sep=';', decimal=',', thousands='.', index_col=0)\n",
+        "    return pd.DataFrame([df.min(), df.max(), df.mean()], index=['Mínimo', 'Máximo', 'Media'])\n",
+        "\n",
+        "resumen_cotizaciones('cotizacion.csv')\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 143
+        },
+        "id": "9kEyk4AyfJPq",
+        "outputId": "4df03577-d0ff-4560-87cc-9b80bc302b76"
+      },
+      "execution_count": 13,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "             Final      Máximo  Mínimo       volumen      Efectivo\n",
+              "Mínimo  153.000000   89.000000    15.0  5.000000e+05   4000.000000\n",
+              "Máximo  845.000000  235.000000   229.0  1.200000e+06  21000.000000\n",
+              "Media   409.666667  160.666667   109.0  8.666667e+05  14333.333333"
+            ],
+            "text/html": [
+              "\n",
+              "  <div id=\"df-d909fa8b-3a79-4afa-8e64-4f267f0dabae\" class=\"colab-df-container\">\n",
+              "    <div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>Final</th>\n",
+              "      <th>Máximo</th>\n",
+              "      <th>Mínimo</th>\n",
+              "      <th>volumen</th>\n",
+              "      <th>Efectivo</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>Mínimo</th>\n",
+              "      <td>153.000000</td>\n",
+              "      <td>89.000000</td>\n",
+              "      <td>15.0</td>\n",
+              "      <td>5.000000e+05</td>\n",
+              "      <td>4000.000000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>Máximo</th>\n",
+              "      <td>845.000000</td>\n",
+              "      <td>235.000000</td>\n",
+              "      <td>229.0</td>\n",
+              "      <td>1.200000e+06</td>\n",
+              "      <td>21000.000000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>Media</th>\n",
+              "      <td>409.666667</td>\n",
+              "      <td>160.666667</td>\n",
+              "      <td>109.0</td>\n",
+              "      <td>8.666667e+05</td>\n",
+              "      <td>14333.333333</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "</div>\n",
+              "    <div class=\"colab-df-buttons\">\n",
+              "\n",
+              "  <div class=\"colab-df-container\">\n",
+              "    <button class=\"colab-df-convert\" onclick=\"convertToInteractive('df-d909fa8b-3a79-4afa-8e64-4f267f0dabae')\"\n",
+              "            title=\"Convert this dataframe to an interactive table.\"\n",
+              "            style=\"display:none;\">\n",
+              "\n",
+              "  <svg xmlns=\"http://www.w3.org/2000/svg\" height=\"24px\" viewBox=\"0 -960 960 960\">\n",
+              "    <path d=\"M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z\"/>\n",
+              "  </svg>\n",
+              "    </button>\n",
+              "\n",
+              "  <style>\n",
+              "    .colab-df-container {\n",
+              "      display:flex;\n",
+              "      gap: 12px;\n",
+              "    }\n",
+              "\n",
+              "    .colab-df-convert {\n",
+              "      background-color: #E8F0FE;\n",
+              "      border: none;\n",
+              "      border-radius: 50%;\n",
+              "      cursor: pointer;\n",
+              "      display: none;\n",
+              "      fill: #1967D2;\n",
+              "      height: 32px;\n",
+              "      padding: 0 0 0 0;\n",
+              "      width: 32px;\n",
+              "    }\n",
+              "\n",
+              "    .colab-df-convert:hover {\n",
+              "      background-color: #E2EBFA;\n",
+              "      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);\n",
+              "      fill: #174EA6;\n",
+              "    }\n",
+              "\n",
+              "    .colab-df-buttons div {\n",
+              "      margin-bottom: 4px;\n",
+              "    }\n",
+              "\n",
+              "    [theme=dark] .colab-df-convert {\n",
+              "      background-color: #3B4455;\n",
+              "      fill: #D2E3FC;\n",
+              "    }\n",
+              "\n",
+              "    [theme=dark] .colab-df-convert:hover {\n",
+              "      background-color: #434B5C;\n",
+              "      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);\n",
+              "      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));\n",
+              "      fill: #FFFFFF;\n",
+              "    }\n",
+              "  </style>\n",
+              "\n",
+              "    <script>\n",
+              "      const buttonEl =\n",
+              "        document.querySelector('#df-d909fa8b-3a79-4afa-8e64-4f267f0dabae button.colab-df-convert');\n",
+              "      buttonEl.style.display =\n",
+              "        google.colab.kernel.accessAllowed ? 'block' : 'none';\n",
+              "\n",
+              "      async function convertToInteractive(key) {\n",
+              "        const element = document.querySelector('#df-d909fa8b-3a79-4afa-8e64-4f267f0dabae');\n",
+              "        const dataTable =\n",
+              "          await google.colab.kernel.invokeFunction('convertToInteractive',\n",
+              "                                                    [key], {});\n",
+              "        if (!dataTable) return;\n",
+              "\n",
+              "        const docLinkHtml = 'Like what you see? Visit the ' +\n",
+              "          '<a target=\"_blank\" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'\n",
+              "          + ' to learn more about interactive tables.';\n",
+              "        element.innerHTML = '';\n",
+              "        dataTable['output_type'] = 'display_data';\n",
+              "        await google.colab.output.renderOutput(dataTable, element);\n",
+              "        const docLink = document.createElement('div');\n",
+              "        docLink.innerHTML = docLinkHtml;\n",
+              "        element.appendChild(docLink);\n",
+              "      }\n",
+              "    </script>\n",
+              "  </div>\n",
+              "\n",
+              "\n",
+              "    <div id=\"df-7f0ca85c-3546-467b-95d1-2861fb45f7cb\">\n",
+              "      <button class=\"colab-df-quickchart\" onclick=\"quickchart('df-7f0ca85c-3546-467b-95d1-2861fb45f7cb')\"\n",
+              "                title=\"Suggest charts\"\n",
+              "                style=\"display:none;\">\n",
+              "\n",
+              "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"24px\"viewBox=\"0 0 24 24\"\n",
+              "     width=\"24px\">\n",
+              "    <g>\n",
+              "        <path d=\"M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z\"/>\n",
+              "    </g>\n",
+              "</svg>\n",
+              "      </button>\n",
+              "\n",
+              "<style>\n",
+              "  .colab-df-quickchart {\n",
+              "      --bg-color: #E8F0FE;\n",
+              "      --fill-color: #1967D2;\n",
+              "      --hover-bg-color: #E2EBFA;\n",
+              "      --hover-fill-color: #174EA6;\n",
+              "      --disabled-fill-color: #AAA;\n",
+              "      --disabled-bg-color: #DDD;\n",
+              "  }\n",
+              "\n",
+              "  [theme=dark] .colab-df-quickchart {\n",
+              "      --bg-color: #3B4455;\n",
+              "      --fill-color: #D2E3FC;\n",
+              "      --hover-bg-color: #434B5C;\n",
+              "      --hover-fill-color: #FFFFFF;\n",
+              "      --disabled-bg-color: #3B4455;\n",
+              "      --disabled-fill-color: #666;\n",
+              "  }\n",
+              "\n",
+              "  .colab-df-quickchart {\n",
+              "    background-color: var(--bg-color);\n",
+              "    border: none;\n",
+              "    border-radius: 50%;\n",
+              "    cursor: pointer;\n",
+              "    display: none;\n",
+              "    fill: var(--fill-color);\n",
+              "    height: 32px;\n",
+              "    padding: 0;\n",
+              "    width: 32px;\n",
+              "  }\n",
+              "\n",
+              "  .colab-df-quickchart:hover {\n",
+              "    background-color: var(--hover-bg-color);\n",
+              "    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);\n",
+              "    fill: var(--button-hover-fill-color);\n",
+              "  }\n",
+              "\n",
+              "  .colab-df-quickchart-complete:disabled,\n",
+              "  .colab-df-quickchart-complete:disabled:hover {\n",
+              "    background-color: var(--disabled-bg-color);\n",
+              "    fill: var(--disabled-fill-color);\n",
+              "    box-shadow: none;\n",
+              "  }\n",
+              "\n",
+              "  .colab-df-spinner {\n",
+              "    border: 2px solid var(--fill-color);\n",
+              "    border-color: transparent;\n",
+              "    border-bottom-color: var(--fill-color);\n",
+              "    animation:\n",
+              "      spin 1s steps(1) infinite;\n",
+              "  }\n",
+              "\n",
+              "  @keyframes spin {\n",
+              "    0% {\n",
+              "      border-color: transparent;\n",
+              "      border-bottom-color: var(--fill-color);\n",
+              "      border-left-color: var(--fill-color);\n",
+              "    }\n",
+              "    20% {\n",
+              "      border-color: transparent;\n",
+              "      border-left-color: var(--fill-color);\n",
+              "      border-top-color: var(--fill-color);\n",
+              "    }\n",
+              "    30% {\n",
+              "      border-color: transparent;\n",
+              "      border-left-color: var(--fill-color);\n",
+              "      border-top-color: var(--fill-color);\n",
+              "      border-right-color: var(--fill-color);\n",
+              "    }\n",
+              "    40% {\n",
+              "      border-color: transparent;\n",
+              "      border-right-color: var(--fill-color);\n",
+              "      border-top-color: var(--fill-color);\n",
+              "    }\n",
+              "    60% {\n",
+              "      border-color: transparent;\n",
+              "      border-right-color: var(--fill-color);\n",
+              "    }\n",
+              "    80% {\n",
+              "      border-color: transparent;\n",
+              "      border-right-color: var(--fill-color);\n",
+              "      border-bottom-color: var(--fill-color);\n",
+              "    }\n",
+              "    90% {\n",
+              "      border-color: transparent;\n",
+              "      border-bottom-color: var(--fill-color);\n",
+              "    }\n",
+              "  }\n",
+              "</style>\n",
+              "\n",
+              "      <script>\n",
+              "        async function quickchart(key) {\n",
+              "          const quickchartButtonEl =\n",
+              "            document.querySelector('#' + key + ' button');\n",
+              "          quickchartButtonEl.disabled = true;  // To prevent multiple clicks.\n",
+              "          quickchartButtonEl.classList.add('colab-df-spinner');\n",
+              "          try {\n",
+              "            const charts = await google.colab.kernel.invokeFunction(\n",
+              "                'suggestCharts', [key], {});\n",
+              "          } catch (error) {\n",
+              "            console.error('Error during call to suggestCharts:', error);\n",
+              "          }\n",
+              "          quickchartButtonEl.classList.remove('colab-df-spinner');\n",
+              "          quickchartButtonEl.classList.add('colab-df-quickchart-complete');\n",
+              "        }\n",
+              "        (() => {\n",
+              "          let quickchartButtonEl =\n",
+              "            document.querySelector('#df-7f0ca85c-3546-467b-95d1-2861fb45f7cb button');\n",
+              "          quickchartButtonEl.style.display =\n",
+              "            google.colab.kernel.accessAllowed ? 'block' : 'none';\n",
+              "        })();\n",
+              "      </script>\n",
+              "    </div>\n",
+              "\n",
+              "    </div>\n",
+              "  </div>\n"
+            ],
+            "application/vnd.google.colaboratory.intrinsic+json": {
+              "type": "dataframe",
+              "summary": "{\n  \"name\": \"resumen_cotizaciones('cotizacion\",\n  \"rows\": 3,\n  \"fields\": [\n    {\n      \"column\": \"Final\",\n      \"properties\": {\n        \"dtype\": \"number\",\n        \"std\": 349.8230240395108,\n        \"min\": 153.0,\n        \"max\": 845.0,\n        \"num_unique_values\": 3,\n        \"samples\": [\n          153.0,\n          845.0,\n          409.6666666666667\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": \"M\\u00e1ximo\",\n      \"properties\": {\n        \"dtype\": \"number\",\n        \"std\": 73.00405874054259,\n        \"min\": 89.0,\n        \"max\": 235.0,\n        \"num_unique_values\": 3,\n        \"samples\": [\n          89.0,\n          235.0,\n          160.66666666666666\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": \"M\\u00ednimo\",\n      \"properties\": {\n        \"dtype\": \"number\",\n        \"std\": 107.26291686008419,\n        \"min\": 15.0,\n        \"max\": 229.0,\n        \"num_unique_values\": 3,\n        \"samples\": [\n          15.0,\n          229.0,\n          109.0\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": \"volumen\",\n      \"properties\": {\n        \"dtype\": \"number\",\n        \"std\": 350132.25014641625,\n        \"min\": 500000.0,\n        \"max\": 1200000.0,\n        \"num_unique_values\": 3,\n        \"samples\": [\n          500000.0,\n          1200000.0,\n          866666.6666666666\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": \"Efectivo\",\n      \"properties\": {\n        \"dtype\": \"number\",\n        \"std\": 8565.650609870238,\n        \"min\": 4000.0,\n        \"max\": 21000.0,\n        \"num_unique_values\": 3,\n        \"samples\": [\n          4000.0,\n          21000.0,\n          14333.333333333334\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    }\n  ]\n}"
+            }
+          },
+          "metadata": {},
+          "execution_count": 13
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "EJERCICIO 7"
+      ],
+      "metadata": {
+        "id": "pDA0eXRpfJmS"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "\n",
+        "df = pd.read_csv('titanic.csv', sep=';', index_col=0)\n",
+        "\n",
+        "print(\"Dimensiones:\", df.shape)\n",
+        "print(\"Número de datos:\", df.size)\n",
+        "print(\"Nombres de columnas:\", df.columns.tolist())\n",
+        "print(\"Nombres de filas (índices):\", df.index.tolist())\n",
+        "print(\"Tipos de datos:\\n\", df.dtypes)\n",
+        "print(\"Primeras 10 filas:\\n\", df.head(10))\n",
+        "print(\"Últimas 10 filas:\\n\", df.tail(10))\n",
+        "\n",
+        "if 148 in df.index:\n",
+        "    print(\"Pasajero con ID 148:\\n\", df.loc[148])\n",
+        "else:\n",
+        "    print(\"No existe pasajero con ID 148 en el DataFrame\")\n",
+        "\n",
+        "print(\"Filas pares:\\n\", df.iloc[::2])\n",
+        "\n",
+        "print(\"Nombres pasajeros en 1ª clase ordenados:\")\n",
+        "print(df[df['Pclass'] == 1]['Name'].sort_values().to_list())\n",
+        "\n",
+        "survived_pct = df['Survived'].mean() * 100\n",
+        "dead_pct = 100 - survived_pct\n",
+        "print(f\"Porcentaje supervivientes: {survived_pct:.2f}%\")\n",
+        "print(f\"Porcentaje muertos: {dead_pct:.2f}%\")\n",
+        "\n",
+        "print(\"Porcentaje supervivientes por clase:\")\n",
+        "print(df.groupby('Pclass')['Survived'].mean() * 100)\n",
+        "\n",
+        "df = df.dropna(subset=['Age'])\n",
+        "\n",
+        "print(\"Edad media de mujeres por clase:\")\n",
+        "print(df[df['Sex'] == 'female'].groupby('Pclass')['Age'].mean())\n",
+        "\n",
+        "df['MenorEdad'] = df['Age'] < 18\n",
+        "\n",
+        "print(\"Supervivencia por clase y edad (<18 o no):\")\n",
+        "print(df.groupby(['Pclass', 'MenorEdad'])['Survived'].mean() * 100)\n",
+        "\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "vRi8fM-yfLFb",
+        "outputId": "bc284221-6d34-4525-c17a-e0f58ea7c021"
+      },
+      "execution_count": 19,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Dimensiones: (3, 5)\n",
+            "Número de datos: 15\n",
+            "Nombres de columnas: ['Survived', 'Pclass', 'Name', 'Sex', 'Age']\n",
+            "Nombres de filas (índices): [1, 2, 3]\n",
+            "Tipos de datos:\n",
+            " Survived     int64\n",
+            "Pclass       int64\n",
+            "Name        object\n",
+            "Sex         object\n",
+            "Age          int64\n",
+            "dtype: object\n",
+            "Primeras 10 filas:\n",
+            "              Survived  Pclass  \\\n",
+            "PassengerId                     \n",
+            "1                   0       3   \n",
+            "2                   1       1   \n",
+            "3                   1       3   \n",
+            "\n",
+            "                                                          Name     Sex  Age  \n",
+            "PassengerId                                                                  \n",
+            "1                                      Braund, Mr. Owen Harris    male   22  \n",
+            "2            Cumings, Mrs. John Bradley (Florence Briggs Th...  female   38  \n",
+            "3                                       Heikkinen, Miss. Laina  female   26  \n",
+            "Últimas 10 filas:\n",
+            "              Survived  Pclass  \\\n",
+            "PassengerId                     \n",
+            "1                   0       3   \n",
+            "2                   1       1   \n",
+            "3                   1       3   \n",
+            "\n",
+            "                                                          Name     Sex  Age  \n",
+            "PassengerId                                                                  \n",
+            "1                                      Braund, Mr. Owen Harris    male   22  \n",
+            "2            Cumings, Mrs. John Bradley (Florence Briggs Th...  female   38  \n",
+            "3                                       Heikkinen, Miss. Laina  female   26  \n",
+            "No existe pasajero con ID 148 en el DataFrame\n",
+            "Filas pares:\n",
+            "              Survived  Pclass                     Name     Sex  Age\n",
+            "PassengerId                                                        \n",
+            "1                   0       3  Braund, Mr. Owen Harris    male   22\n",
+            "3                   1       3   Heikkinen, Miss. Laina  female   26\n",
+            "Nombres pasajeros en 1ª clase ordenados:\n",
+            "['Cumings, Mrs. John Bradley (Florence Briggs Thayer)']\n",
+            "Porcentaje supervivientes: 66.67%\n",
+            "Porcentaje muertos: 33.33%\n",
+            "Porcentaje supervivientes por clase:\n",
+            "Pclass\n",
+            "1    100.0\n",
+            "3     50.0\n",
+            "Name: Survived, dtype: float64\n",
+            "Edad media de mujeres por clase:\n",
+            "Pclass\n",
+            "1    38.0\n",
+            "3    26.0\n",
+            "Name: Age, dtype: float64\n",
+            "Supervivencia por clase y edad (<18 o no):\n",
+            "Pclass  MenorEdad\n",
+            "1       False        100.0\n",
+            "3       False         50.0\n",
+            "Name: Survived, dtype: float64\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "ejercicio 8"
+      ],
+      "metadata": {
+        "id": "7VjuZNEtjRT6"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "files = ['emisiones-2016.csv', 'emisiones-2017.csv', 'emisiones-2018.csv', 'emisiones-2019.csv']\n",
+        "dfs = []\n",
+        "\n",
+        "for f in files:\n",
+        "    df = pd.read_csv(f, sep=';', encoding='latin1')\n",
+        "    dfs.append(df)\n",
+        "\n",
+        "df_all = pd.concat(dfs, ignore_index=True)\n",
+        "\n",
+        "cols_days = [col for col in df_all.columns if col.startswith('D')]\n",
+        "cols_keep = ['ESTACION', 'MAGNITUD', 'AÑO', 'MES'] + cols_days\n",
+        "df_all = df_all[cols_keep]\n",
+        "\n",
+        "df_melt = df_all.melt(id_vars=['ESTACION', 'MAGNITUD', 'AÑO', 'MES'],\n",
+        "                      value_vars=cols_days,\n",
+        "                      var_name='DIA', value_name='EMISION')\n",
+        "\n",
+        "df_melt['DIA_NUM'] = df_melt['DIA'].str.extract('D(\\d+)').astype(int)\n",
+        "\n",
+        "df_melt['FECHA'] = pd.to_datetime(dict(year=df_melt['AÑO'], month=df_melt['MES'], day=df_melt['DIA_NUM']), errors='coerce')\n",
+        "\n",
+        "df_melt = df_melt.dropna(subset=['FECHA'])\n",
+        "\n",
+        "df_melt = df_melt.sort_values(by=['ESTACION', 'MAGNITUD', 'FECHA']).reset_index(drop=True)\n",
+        "\n",
+        "print(\"Estaciones disponibles:\", df_melt['ESTACION'].unique())\n",
+        "print(\"Contaminantes disponibles:\", df_melt['MAGNITUD'].unique())\n",
+        "\n",
+        "def emisiones_por_rango(estacion, contaminante, fecha_inicio, fecha_fin):\n",
+        "    mask = (\n",
+        "        (df_melt['ESTACION'] == estacion) &\n",
+        "        (df_melt['MAGNITUD'] == contaminante) &\n",
+        "        (df_melt['FECHA'] >= pd.to_datetime(fecha_inicio)) &\n",
+        "        (df_melt['FECHA'] <= pd.to_datetime(fecha_fin))\n",
+        "    )\n",
+        "    return df_melt.loc[mask, ['FECHA', 'EMISION']].set_index('FECHA')['EMISION']\n",
+        "\n",
+        "print(df_melt.groupby('MAGNITUD')['EMISION'].describe())\n",
+        "\n",
+        "def resumen_estacion_contaminante(estacion, contaminante):\n",
+        "    mask = (df_melt['ESTACION'] == estacion) & (df_melt['MAGNITUD'] == contaminante)\n",
+        "    return df_melt.loc[mask, 'EMISION'].describe()\n",
+        "\n",
+        "def emisiones_mensuales(contaminante, año):\n",
+        "    mask = (df_melt['MAGNITUD'] == contaminante) & (df_melt['AÑO'] == año)\n",
+        "    df_filtrado = df_melt.loc[mask]\n",
+        "    return df_filtrado.groupby('MES')['EMISION'].mean()\n",
+        "\n",
+        "def medias_mensuales_estacion(estacion):\n",
+        "    df_filtrado = df_melt[df_melt['ESTACION'] == estacion]\n",
+        "    return df_filtrado.groupby(['MAGNITUD', 'MES'])['EMISION'].mean().unstack(level=0)\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "RkKU20qejSvC",
+        "outputId": "39840385-6144-4060-d424-59f6065462f2"
+      },
+      "execution_count": 24,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Estaciones disponibles: ['CENTRO' 'NORTE']\n",
+            "Contaminantes disponibles: [6 8]\n",
+            "          count    mean       std   min    25%    50%     75%   max\n",
+            "MAGNITUD                                                           \n",
+            "6          20.0  12.865  0.853029  11.3  12.25  12.80  13.500  14.5\n",
+            "8          40.0  21.665  2.410080  17.8  20.10  21.25  23.025  28.2\n"
+          ]
+        }
+      ]
+    }
+  ]
+}
